@@ -1,5 +1,5 @@
-import csv
 import argparse
+import csv
 import io
 import math
 from datetime import datetime
@@ -19,6 +19,8 @@ IMAGE_HASH_SIZE = 12
 LOOP_MIN_OCCURRENCES = 5
 LOOP_MIN_DURATION_IN_SECONDS = 3
 LOOP_DIFF_MARGIN_ERROR = 3
+
+MAX_FRAME_COUNT = 1_000_000
 
 
 def main() -> None:
@@ -53,7 +55,7 @@ def main() -> None:
         if not ret:
             break
 
-        frame_count += 1
+        frame_count = (frame_count + 1) % MAX_FRAME_COUNT
 
         if frame_count % FRAME_SAMPLE_INTERVAL != 0:
             continue
