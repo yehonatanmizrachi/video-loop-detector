@@ -96,10 +96,10 @@ def has_looped_item(input_list: list, loop_min_size: float, min_occurrences: int
             continue
 
         differences = [item_indices[i + 1] - item_indices[i] for i in range(len(item_indices) - 1)]
-        if not all(difference > loop_min_size for difference in differences):
+        if not all(difference >= loop_min_size for difference in differences):
             continue
 
-        if all(math.fabs(differences[0] - difference) < margin_error for difference in differences):
+        if all(math.fabs(differences[0] - difference) <= margin_error for difference in differences):
             return True
 
     return False
