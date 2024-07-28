@@ -55,7 +55,7 @@ def main() -> None:
 
         frame_count += 1
 
-        if frame_count % FRAME_SAMPLE_INTERVAL:
+        if frame_count % FRAME_SAMPLE_INTERVAL != 0:
             continue
 
         frame_pil = Image.fromarray(cv2.cvtColor(frame, cv2.COLOR_BGR2RGB))
@@ -71,14 +71,14 @@ def main() -> None:
             frames_diff_hashes.append(diff_hash)
 
         if frame_count % loop_check_interval == 0:
-            has_loop = has_looped_item(frames_diff_hashes, loop_min_size, LOOP_MIN_OCCURRENCES, LOOP_DIFF_MARGIN_ERROR)
             check_date = datetime.now().isoformat()
+            has_loop = has_looped_item(frames_diff_hashes, loop_min_size, LOOP_MIN_OCCURRENCES, LOOP_DIFF_MARGIN_ERROR)
 
             with open(output_file_name, mode='a', newline='') as file:
                 csv_writer = csv.writer(file)
                 csv_writer.writerow([check_date, has_loop])
 
-            print(f'Has loop: {has_loop}')
+            print(f'Check date: {check_date}, Has loop: {has_loop}')
 
         previous_frame_pil = frame_pil
 
