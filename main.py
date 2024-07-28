@@ -9,13 +9,11 @@ import imagehash
 from PIL import Image, ImageChops
 
 INPUT_FPS = 12  # When set to None the fps will be inferred using opencv.
-
 FRAME_SAMPLE_INTERVAL = 5
-HASH_LIST_WINDOW_SIZE_IN_SECONDS = 60
-LOOP_CHECK_INTERVAL_IN_SECONDS = 5
-
+WINDOW_SIZE_IN_SECONDS = 60
 IMAGE_HASH_SIZE = 12
 
+LOOP_CHECK_INTERVAL_IN_SECONDS = 5
 LOOP_MIN_OCCURRENCES = 5
 LOOP_MIN_DURATION_IN_SECONDS = 3
 LOOP_DIFF_MARGIN_ERROR = 3
@@ -41,7 +39,7 @@ def main() -> None:
     print(f'Writing output to: {output_file_name}')
 
     effective_fps = fps / FRAME_SAMPLE_INTERVAL
-    hash_list_size = effective_fps * HASH_LIST_WINDOW_SIZE_IN_SECONDS
+    hash_list_size = effective_fps * WINDOW_SIZE_IN_SECONDS
     loop_check_interval = effective_fps * LOOP_CHECK_INTERVAL_IN_SECONDS
     loop_min_size = effective_fps * LOOP_MIN_DURATION_IN_SECONDS
 
