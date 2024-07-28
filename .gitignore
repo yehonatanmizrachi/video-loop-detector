@@ -291,3 +291,4 @@ pyrightconfig.json
 .idea/
 *.mp4
 *.png
+*.csv
